@@ -1,14 +1,27 @@
-# com-etzhayyim-kyoninka （許認可アクター）
+# com-etzhayyim-kyoninka （許認可 artificial organism）
 
-A **robotaxi legal-deployment actor** — the cross-jurisdiction permits,
+A **robotaxi legal-deployment artificial organism** — the cross-jurisdiction permits,
 licences, filings and statutory conditions a driverless-taxi service must hold
 before it may legally carry a passenger on a public road, in **Japan and
-worldwide**. Built on this workspace's
-[`langgraph-clj`](../../com-junkawasaki/langgraph-clj) StateGraph runtime
-(portable `.cljc`, supervised run, `interrupt-before` human-in-the-loop,
-Datomic/in-mem checkpoints), in the same shape as the three reference actors:
-**robotaxi-actor** (AR1 ⊣ SafetyGovernor) / **gftd-talent-actor**
-(HR-LLM ⊣ PolicyGovernor) / **ai-gftd-itonami** (ops-LLM ⊣ CertGovernor).
+worldwide**.
+
+Platform vocabulary:
+
+- **kotoba** is the sovereign data/compute substrate: CID, Datom log, WASM,
+  auth and network primitives.
+- **kototama** is the common organism/actor platform and runtime adapter layer.
+- **app-aozora** is the AT Protocol product boundary: PDS, AppView, XRPC,
+  lexicons, feeds/search and profile publication.
+- **com-etzhayyim-kyoninka** is the domain organism. It may surface as an
+  AT Protocol actor, but it does not run its own PDS.
+
+The current runnable topology uses
+[`langgraph-clj`](../../com-junkawasaki/langgraph-clj) StateGraph as the
+orchestration backend (portable `.cljc`, supervised run, `interrupt-before`
+human-in-the-loop, Datomic/in-mem checkpoints), in the same governed shape as
+the three reference actors: **robotaxi-actor** (AR1 ⊣ SafetyGovernor) /
+**gftd-talent-actor** (HR-LLM ⊣ PolicyGovernor) / **ai-gftd-itonami**
+(ops-LLM ⊣ CertGovernor).
 
 > **Why an actor layer?** "Can we launch a robotaxi here?" is not a model
 > question — it is a question of binding law: which permits are mandatory in

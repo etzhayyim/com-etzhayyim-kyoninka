@@ -1,8 +1,14 @@
 # com-etzhayyim-kyoninka — Design
 
-許認可 (kyoninka) = *permits, licences and approvals*. This actor answers one
-question for a robotaxi service, per jurisdiction, with an immutable paper
-trail: **"are we legally clear to operate here, and who must sign off?"**
+許認可 (kyoninka) = *permits, licences and approvals*. This artificial organism
+answers one question for a robotaxi service, per jurisdiction, with an immutable
+paper trail: **"are we legally clear to operate here, and who must sign off?"**
+
+In the platform model, `kotoba` is the sovereign data/compute substrate,
+`kototama` is the common organism/actor platform, `app-aozora` is the AT
+Protocol PDS/AppView boundary, and this repo is the domain organism. Kyoninka
+can publish an AT Protocol actor profile through app-aozora, but the PDS is not
+owned by this repo or by `etzhayyim.com`.
 
 It is the fourth instance of the workspace actor pattern
 (`.cursor/rules/always/actor-pattern-rule.mdc`): a contained intelligence node

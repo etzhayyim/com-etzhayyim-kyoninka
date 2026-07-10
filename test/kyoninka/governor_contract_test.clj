@@ -77,6 +77,22 @@
       (is (= :commit (get-in res [:state :disposition])))
       (is (= :ready-to-apply (:recommendation (store/assessment-of s "dp-jp")))))))
 
+(deftest missing-phase-context-does-not-grant-max-autonomy
+  ;; default-phase is the fallback both when :phase is entirely absent
+  ;; from context (kyoninka.deployment) and when an unrecognized phase
+  ;; number is passed (phase/gate). It used to be 3 -- the most
+  ;; permissive tier, where :permit/assess auto-commits -- so a caller
+  ;; that simply forgot to set :phase silently got MAXIMUM autonomy
+  ;; instead of the safe "start narrow" default this namespace's own
+  ;; docstring promises.
+  (testing "omitting :phase from context still requires human approval on a clean permit-assess"
+    (let [[s actor] (fresh)
+          res (g/run* actor {:request {:op :permit/assess :deployment "dp-jp"} :context {}}
+                      {:thread-id "mp"})]
+      (is (not= :commit (get-in res [:state :disposition]))
+          "a confident permit-assess must not auto-commit when :phase is unset")
+      (is (nil? (store/assessment-of s "dp-jp")) "SSoT untouched without explicit phase"))))
+
 (deftest reject-signoff-holds
   (testing "an authority rejection records a hold, not a launch authorization"
     (let [[s actor] (fresh)

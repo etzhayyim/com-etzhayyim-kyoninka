@@ -1,0 +1,88 @@
+;; kyoninka 許認可 — actor manifest (Gen-3 kotoba-native)
+;; Robotaxi legal-deployment permitting actor: the cross-jurisdiction permits,
+;; licences, filings and statutory conditions a driverless-taxi service must
+;; hold before it may legally carry a passenger on a public road, in Japan and
+;; worldwide. Sibling of the workspace actor lineage (robotaxi-actor AR1 ⊣
+;; SafetyGovernor / ai-gftd-itonami ops-LLM ⊣ CertGovernor) and of the
+;; etzhayyim legal/concierge lineage (chigiri 契 / toritsugi 取次 / hinagata
+;; 雛形 / tate 盾 / ooyake 公). ADR-2606272337.
+{:actor/id           "kyoninka"
+ :actor/glyph        "許認可"
+ :actor/display-name "許認可 — Robotaxi Legal-Deployment Permitting"
+ :actor/tier         :tier-b
+ :actor/integrates ["ainori" "chigiri" "itonami" "ooyake" "toritsugi" "wadachi"]
+ :actor/domain       "kyoninka.etzhayyim.com"
+ :actor/purpose
+ "Robotaxi legal-deployment permitting actor — answers, per jurisdiction and with an immutable paper trail, \"are we legally clear to operate a driverless-taxi service here, and who must sign off?\". A contained reg-LLM (regulatory advisor) proposes a legal-readiness recommendation from a deployment's permitting facts; an independent PermitGovernor censors it against the jurisdiction's mandatory-permit / minimum-insurance / required-filing / SAE-level invariants; a public-road launch ALWAYS routes to a human regulatory authority. observe → recommend ONLY: the actor never grants a permit and never activates a vehicle. The jurisdiction rulebook (JP 改正道路交通法 特定自動運行 / 道路運送車両法 型式指定 / 道路運送法; US-CA DMV+CPUC+FMVSS; DE StVG AFGBV+UNECE+GDPR; SG LTA) is DATA, not code. kotoba-EAVT-native; the runnable langgraph-clj StateGraph lives in orgs/etzhayyim/com-etzhayyim-kyoninka."
+ :actor/status       :r0
+ :actor/adr          ["2606272337" "2605262700" "2606021600" "2605231525" "2605312345"]
+ :actor/primary-lexicon "com.etzhayyim.kyoninka.deploymentReadiness"
+
+ :actor/charter-rider {:rider/version "3.5" :rider/applied true}
+
+ :actor/gates
+ [{:gate/id "G1" :gate/name "observe-recommend-only"
+   :gate/rule "actor は許認可を付与せず車両を起動しない。提案の effect は :assessment のみ。permit-grant / vehicle-activation は構造的に表現不能(no-actuation 不変条件、テスト強制)"}
+  {:gate/id "G2" :gate/name "independent-governor"
+   :gate/rule "知能ノード(reg-LLM)は封じ込め proposal のみ。別系統の PermitGovernor が法的不変条件で検閲 — governor が拒否する readiness を actor は決して記録しない(robotaxi safety-contract の許認可版)"}
+  {:gate/id "G3" :gate/name "human-authority-signoff"
+   :gate/rule "公道走行(launch)は高リスク → 必ず人間の規制当局がサインオフ(interrupt-before :request-approval)。チェックリストが全充足でも自動では走らせない"}
+  {:gate/id "G4" :gate/name "hard-invariants-unoverridable"
+   :gate/rule "必須許認可の未取得/失効・賠償下限未満・SAE上限超過・届出未受理は HARD HOLD。人間でも不充足を超えて承認できない"}
+  {:gate/id "G5" :gate/name "rulebook-is-data"
+   :gate/rule "法域の必須許認可/賠償下限/届出/上限SAE は jurisdiction ground datom の属性。法域の追加・修正はコード変更でなくレビュー済み編集(counsel 監修)"}
+  {:gate/id "G6" :gate/name "immutable-ledger"
+   :gate/rule "全 commit/hold/record を append-only の許認可ジェネアロジー台帳へ — どの事実がどの判定を根拠づけ誰がサインオフしたかを再生可能(規制トレーサビリティ)"}
+  {:gate/id "G7" :gate/name "kotoba-eavt-native"
+   :gate/rule "jurisdiction/deployment/permit/insurance/filing/assessment は kotoba Datom。Store は :db-api 駆動(MemStore ≡ DatomicStore、kotoba pod 差し替え可)"}
+  {:gate/id "G8" :gate/name "non-adjudicating-not-a-law-firm"
+   :gate/rule "一般法情報であって法的助言ではない(chigiri 契 と同じ UPL 境界)。要件は例示、申請前に各規制当局で現行法令を確認"}
+  {:gate/id "G9" :gate/name "murakumo-only"
+   :gate/rule "reg-LLM の実モデルは Murakumo 既定(ADR-2605215000 / v3.5 目的関数評価)。外部 LLM への秘匿事実送出はしない"}
+  {:gate/id "G10" :gate/name "no-server-key"
+   :gate/rule "actor 鍵は自己生成 did:key(present-only、seed 封印)。秘密鍵を git にコミットしない(.kyoninka/identity.edn gitignore)"}
+  {:gate/id "G11" :gate/name "autonomous-publication"
+   :gate/rule "kyoninka は許認可準備度のダイジェストを自律的に投稿してよい(ADR-2606281500 種をまく doctrine)。事前承認は不要。soil(rails): self-did:key present-only + 取消可能な member CACAO leash + append-only 公開ログ + Rider §2 catastrophe-veto コンテンツスキャン + 個人非追跡 + Murakumo 既定。publication ≠ actuation: 公道走行(launch)の当局サインオフ(G3)・許認可付与/車両起動の禁止(G1)はゲート維持。actor は『launch-ready と査定した』と自律発言できるが、車両は自律起動しない"}]
+
+ ;; ADR-2606281500: autonomous publication ON by default (no per-post prior restraint).
+ :actor/social
+ {:social/autonomous? true
+  :social/principal :member-cacao-leash    ; revocable; the off-switch
+  :social/key :self-did-key                ; present-only, sealed seed (no custodial key)
+  :social/transparency :append-only-public-log
+  :social/content-scan :rider-s2-catastrophe-veto
+  :social/posts ["許認可準備度ダイジェスト(法域別・デプロイ別の充足状況と判定)"]
+  :social/boundary "publication only — launch sign-off / permit-grant / vehicle-activation stay human-gated"
+  :social/cell "methods/organism.cljc (kototama organism)"
+  :social/status :enabled}                 ; cell built + tested; live emit needs member leash + PDS
+
+ :actor/cells
+ [{:cell/id "advise"  :cell/kind :langgraph :cell/runtime :wasm
+   :cell/doc "reg-LLM proposal(封じ込めた法務助言。付与はしない)"}
+  {:cell/id "govern"  :cell/kind :datalog :cell/runtime :kotoba
+   :cell/method "methods/procedure.cljc:evaluate"
+   :cell/doc "PermitGovernor — 法的不変条件で proposal を検閲(法域認識/SAE上限/許認可有効性/賠償下限/届出/遠隔監視/no-actuation)"}
+  {:cell/id "decide"  :cell/kind :langgraph :cell/runtime :wasm
+   :cell/doc "段階導入ゲート込みで commit / hold / 当局サインオフ へ振り分け"}
+  {:cell/id "site"    :cell/kind :clojure :cell/runtime :wasm
+   :cell/method "methods/site_gen.cljc:-main"
+   :cell/doc "手続きの可視化 — 手続きフロー + 法域別要件マトリクス + デプロイ準備状況を crawlable static HTML へ(etzhayyim.com/kyoninka)"}
+  {:cell/id "organism" :cell/kind :clojure :cell/runtime :wasm
+   :cell/method "methods/organism.cljc:beat"
+   :cell/reuses "kotoba-lang/kototama (SHA-pinned in deps.edn) — 共通 organism/cell lib"
+   :cell/doc "自律投稿 heartbeat(種をまく doctrine, ADR-2606281500) — kototama organism として許認可準備ダイジェストを app-aozora / com-etzhayyim へ member-leash 付き dry-run 投稿(:published は主張しない)"}]
+
+ :actor/lexicons
+ ["com.etzhayyim.kyoninka.deploymentReadiness"
+  "com.etzhayyim.kyoninka.jurisdictionRule"
+  "com.etzhayyim.kyoninka.permitRecord"
+  "com.etzhayyim.kyoninka.authoritySignoff"]
+
+ :actor/siblings
+ {:robotaxi-actor "AR1 ⊣ SafetyGovernor — the runnable safety-contract sibling (workspace)"
+  :itonami "ops-LLM ⊣ CertGovernor — airworthiness certification (same governor pattern)"
+  :chigiri "legal-procedure substrate (shared UPL boundary)"
+  :toritsugi "citizen government-procedure concierge"
+  :ooyake "world government atlas + BPMN procedures"
+  :wadachi "autonomous ground mobility (the vehicle kyoninka permits)"
+  :ainori "pooled passenger-mobility commons"}}

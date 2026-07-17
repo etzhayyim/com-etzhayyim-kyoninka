@@ -1,0 +1,46 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/jws-2020/v1"
+  ],
+  "id": "did:web:etzhayyim.com:actor:kyoninka",
+  "alsoKnownAs": [
+    "did:web:kyoninka.etzhayyim.com"
+  ],
+  "verificationMethod": [],
+  "service": [
+    {
+      "id": "did:web:etzhayyim.com:actor:kyoninka#atproto_pds",
+      "type": "AtprotoPersonalDataServer",
+      "serviceEndpoint": "https://pds.aozora.app"
+    },
+    {
+      "id": "did:web:etzhayyim.com:actor:kyoninka#xrpc-libp2p",
+      "type": "AtprotoXrpc",
+      "serviceEndpoint": "/dnsaddr/etzhayyim.com/p2p/12D3KooWGRnHP5hHAxSnPQE5gopDqAzWkZ2NAFi2ZZ6o85FnAiEc"
+    },
+    {
+      "id": "did:web:etzhayyim.com:actor:kyoninka#procedure-viz",
+      "type": "EtzhayyimActorSite",
+      "serviceEndpoint": "https://etzhayyim.com/kyoninka"
+    }
+  ],
+  "_meta": {
+    "adr": [
+      "2606272337",
+      "2605262700",
+      "2606021600",
+      "2606013800",
+      "2606042330"
+    ],
+    "source": "kotoba",
+    "kind": "tier-b",
+    "status": "r0",
+    "glyph": "許認可",
+    "wasmCid": null,
+    "execModel": "service",
+    "primaryLexicon": "com.etzhayyim.kyoninka.deploymentReadiness",
+    "primarySchema": "20-actors/kyoninka/methods/procedure.cljc",
+    "note": "verificationMethod empty — actor self-key (did:key) present-only, no server-minted key (ADR-2605231525); did:web trust root = TLS. observe→recommend only: grants no permit, activates no vehicle."
+  }
+}

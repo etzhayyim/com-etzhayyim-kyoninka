@@ -1,0 +1,14 @@
+{:dependencies
+ [{:dependency/id etzhayyim/root
+   :dependency/repository "https://github.com/etzhayyim/root"
+   :dependency/revision "74314a1fdf6ac3412bd854d86908cea1289ec7ef"
+   :dependency/paths ["90-docs/adr"]}
+  {:dependency/id kotoba-lang/langgraph :dependency/revision "a75fe35038dc9218e26b7da4940989cd13754769"}
+  {:dependency/id kotoba-lang/langchain :dependency/revision "cda206ea2cbe709e134cb7198f85f0eae1993c96"}
+  {:dependency/id kotoba-lang/kototama :dependency/revision "65899deed4fb9cfa3cdfed9d21130c91982d8cd3"}
+  {:dependency/id com.etzhayyim/ainori :dependency/revision "9898db31619d7970e42733d907e61b4e6caf25ea"}
+  {:dependency/id com.etzhayyim/chigiri :dependency/revision "e08560129675106e0bb4b70e23769ff07a711ce7"}
+  {:dependency/id com.etzhayyim/itonami :dependency/revision "2e2d9f98386589ae370f94ad08d95196c90b6953"}
+  {:dependency/id com.etzhayyim/ooyake :dependency/revision "c35c46aabd258d66f7544c03d1a6a8c0a6ffb91a"}
+  {:dependency/id com.etzhayyim/toritsugi :dependency/revision "8f6dad2d9dd282253ebedb5a0721b6ad5afbb636"}
+  {:dependency/id com.etzhayyim/wadachi :dependency/revision "6a35ad4487bdb5ab9fbe635d757182f41eb32d0e"}]}

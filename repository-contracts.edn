@@ -1,0 +1,8 @@
+{:repository/name "com-etzhayyim-kyoninka"
+ :repository/category :actor
+ :repository/canonical-format :edn
+ :repository/canonical-metadata "manifest.edn"
+ :repository/canonical-identity "identity.edn"
+ :repository/dependencies "dependencies.edn"
+ :repository/source-roots ["src"]
+ :repository/test-roots ["test"]}

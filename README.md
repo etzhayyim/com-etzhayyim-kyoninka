@@ -16,7 +16,7 @@ Platform vocabulary:
   AT Protocol actor, but it does not run its own PDS.
 
 The current runnable topology uses
-[`langgraph-clj`](../../com-junkawasaki/langgraph-clj) StateGraph as the
+SHA-pinned [`kotoba-lang/langgraph`](https://github.com/kotoba-lang/langgraph) StateGraph as the
 orchestration backend (portable `.cljc`, supervised run, `interrupt-before`
 human-in-the-loop, Datomic/in-mem checkpoints), in the same governed shape as
 the three reference actors: **robotaxi-actor** (AR1 ⊣ SafetyGovernor) /

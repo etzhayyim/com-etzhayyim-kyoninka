@@ -1,13 +1,15 @@
 {:paths ["src"]
- ;; langgraph-clj brings langchain-clj transitively (both zero-/single-dep,
+ ;; langgraph brings langchain transitively (both zero-/single-dep,
  ;; all .cljc → portable to JVM / SCI / ClojureScript / GraalVM).
- :deps {io.github.com-junkawasaki/langgraph-clj
-        {:local/root "../../com-junkawasaki/langgraph-clj"}}
+ ;; (renamed from com-junkawasaki/langgraph-clj + com-junkawasaki/langchain-clj;
+ ;; no -clj suffix per CLAUDE.md naming policy -- old names 301-redirect on GitHub.)
+ :deps {io.github.kotoba-lang/langgraph
+        {:local/root "../../kotoba-lang/langgraph"}}
  :aliases
- {;; offline workspace dev — pin transitive langchain-clj to local checkout
+ {;; offline workspace dev — pin transitive langchain to local checkout
   :dev {:override-deps
-        {io.github.com-junkawasaki/langchain-clj
-         {:local/root "../../com-junkawasaki/langchain-clj"}}}
+        {io.github.kotoba-lang/langchain
+         {:local/root "../../kotoba-lang/langchain"}}}
   ;; clojure -M:dev:run → drive robotaxi deployment-permitting through one actor
   :run {:main-opts ["-m" "kyoninka.sim"]}
   :test {:extra-paths ["test"]
